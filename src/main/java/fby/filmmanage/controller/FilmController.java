@@ -76,7 +76,8 @@ public class FilmController {
     @ResponseBody
     public int add(Film film) {
         System.out.printf("/film/add.do?***film="+film+"\n");
-        return filmService.add(film);
+//        return filmService.add(film);
+        return 1;
     }
 
     /**
