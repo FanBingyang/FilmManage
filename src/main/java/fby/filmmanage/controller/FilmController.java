@@ -1,12 +1,16 @@
 package fby.filmmanage.controller;
 
 import fby.filmmanage.entity.Film;
+import fby.filmmanage.util.FileSaveUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import fby.filmmanage.service.FilmService;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -74,10 +78,14 @@ public class FilmController {
      */
     @RequestMapping("/add.do")
     @ResponseBody
-    public int add(Film film) {
-        System.out.printf("/film/add.do?***film="+film+"\n");
-//        return filmService.add(film);
-        return 1;
+    public String add(Film film, @RequestParam("file") MultipartFile[] file) {
+        try {
+            FileSaveUtil fileSaveUtil = new FileSaveUtil(film,file);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        filmService.add(film);
+        return "redirect:/film/film.do";
     }
 
     /**
@@ -89,5 +97,18 @@ public class FilmController {
     @ResponseBody
     public List<Film> findExample(Film film){
         return filmService.findExample(film);
+    }
+
+    /**
+     * 观看影片
+     * @param model
+     * @param id
+     * @return
+     */
+    @RequestMapping("watchMovie.do")
+    public String watchMovie(Model model,Integer id){
+        Film film = filmService.findById(id);
+        model.addAttribute("film",film);
+        return "watchMovie";
     }
 }

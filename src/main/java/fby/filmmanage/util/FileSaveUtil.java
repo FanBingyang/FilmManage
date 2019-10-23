@@ -24,13 +24,11 @@ public class FileSaveUtil {
         }
         if (!files[0].isEmpty()){
             name = UUID.randomUUID().toString().replaceAll("-", "") + "." + FilenameUtils.getExtension(files[0].getOriginalFilename());
-            System.out.println("name_1====="+name);
             film.setCoverImg(name);
             files[0].transferTo(new File(Dir + name));
         }
         if (!files[1].isEmpty()){
             name = UUID.randomUUID().toString().replaceAll("-", "") + "." + FilenameUtils.getExtension(files[1].getOriginalFilename());
-            System.out.println("name_2====="+name);
             film.setMovie(name);
             files[1].transferTo(new File(Dir + name));
         }
