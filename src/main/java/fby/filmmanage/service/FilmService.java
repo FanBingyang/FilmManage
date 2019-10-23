@@ -2,6 +2,7 @@ package fby.filmmanage.service;
 
 import fby.filmmanage.entity.Film;
 
+import java.io.File;
 import java.util.List;
 
 /**
