@@ -28,6 +28,9 @@
     <script th:src="@{/js/sb-admin-2.js}"></script>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <style type="text/css">
+        td {text-align:center}
+    </style>
 </head>
 <body>
 
@@ -141,8 +144,8 @@
 
                         <tr th:each="item : ${list}">
                             <td th:text="${item.filmId}"></td>
-                            <td th:text="${item.coverImg}"></td>
-                            <td th:text="${item.filmName}"></td>
+                            <td><img th:src="${'/resource/'+item.coverImg}" style="width: 85px;height: 100px;"></td>
+                            <td><a th:href="'/film/watchMovie.do?id='+${item.filmId}" th:text="${item.filmName}"></a></td>
                             <td th:text="${item.classify}"></td>
                             <td th:text="${item.director}"></td>
                             <td th:text="${item.showtime}"></td>
@@ -187,10 +190,11 @@
                             <input type="text" class="form-control" id="film_Name" placeholder="影片名称" name="filmName">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="coverImg" class="col-sm-2 control-label">影片封面</label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" id="coverImg" placeholder="影片名称" name="file">
+                    <div class="form-group" id="add_coverImg">
+                        <label for="film_coverImg" class="col-sm-2 control-label">影片封面</label>
+                        <div class="col-sm-10" align="center">
+                            <input type="file" class="form-control" id="film_coverImg" name="file">
+                            <img id="CoverImg" src="/img/bg.png" style="width: 85px;height: 100px">
                         </div>
                     </div>
                     <div class="form-group">
@@ -206,9 +210,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="movie" class="col-sm-2 control-label">上传影片</label>
+                        <label for="film_movie" class="col-sm-2 control-label">上传影片</label>
                         <div class="col-sm-10">
-                            <input type="file" class="form-control" id="movie" placeholder="影片上映时间" name="file">
+                            <input id="movie" type="text" class="form-control" name="movie" disabled>
+                            <input type="file" class="form-control" id="film_movie" name="file">
                         </div>
                     </div>
                     <div class="form-group">
@@ -225,7 +230,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" id="update" class="btn btn-primary" onclick="update()" style="display: none;">
+                        <button type="submit" id="update" class="btn btn-primary" style="display: none;" onclick="update()">
                             保存修改
                         </button>
                         <button type="submit" id="insert" class="btn btn-primary">确认添加</button>
@@ -262,6 +267,9 @@
     function insert() {
         $('#insert').show();
         $('#update').hide();
+
+        $('#CoverImg').hide();
+        $('#movie').hide();
     }
 
     //点击编辑按钮
@@ -269,6 +277,9 @@
 
         $('#insert').hide();
         $('#update').show();
+
+        $('#film_coverImg').hide();
+        $('#film_movie').hide();
 
         $.ajax({
             type: "get",
@@ -279,8 +290,13 @@
                 $("#film_Name").val(data.filmName);
                 $("#film_classify").val(data.classify);
                 $("#film_director").val(data.director);
-                $("#film_showtime").val(data.showtime) ;
-                $("#film_sketch").val(data.sketch)
+                $("#movie").val(data.movie);
+                $("#film_showtime").val(data.showtime);
+                $("#film_sketch").val(data.sketch);
+                $("#CoverImg").attr("src","/resource/"+data.coverImg);
+                // $("#CoverImg").src("/resource/"+data.coverImg);
+                // $("#coverImg").src("/resource/"+data.coverImg);
+
             }
         });
     }

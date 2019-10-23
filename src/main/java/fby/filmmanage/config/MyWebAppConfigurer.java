@@ -14,7 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MyWebAppConfigurer implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/image/**").addResourceLocations("file:H:/static/");
+        registry.addResourceHandler("/resource/**").addResourceLocations("file:E:/static/");
+//        registry.addResourceHandler("/movie/**").addResourceLocations("file:E:/static/");
     }
 }
-//13113212:8080/image/kjh.jpg
+//取值：localhost:8080/image/test.png
