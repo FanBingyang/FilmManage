@@ -112,7 +112,8 @@ public class UserServiceImpl implements UserService {
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("userName",ExampleMatcher.GenericPropertyMatchers.contains())         //用户姓名设置模糊查询
                 .withMatcher("tel",ExampleMatcher.GenericPropertyMatchers.contains())              //用户电话设置模糊查询
-                .withMatcher("address",ExampleMatcher.GenericPropertyMatchers.contains());         //用户地址设置模糊查询
+                .withMatcher("address",ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("sex",ExampleMatcher.GenericPropertyMatchers.contains());         //用户地址设置模糊查询
         Example<User> userExample = Example.of(user,matcher);
         return userJpa.findAll(userExample);
     }

@@ -8,6 +8,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 import fby.filmmanage.service.FilmService;
 
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,7 @@ public class FilmServiceImpl implements FilmService {
      */
     @Override
     public int add(Film film) {
+
         filmJpa.save(film);
         return 1;
     }
@@ -97,7 +99,7 @@ public class FilmServiceImpl implements FilmService {
                 //.withMatcher("address" ,ExampleMatcher.GenericPropertyMatchers.startsWith());//模糊查询匹配开头，即{username}%
                 //.withIgnorePaths("password");//忽略字段，即不管password是什么值都不加入查询条件
          */
-
+        System.out.println(film);
         ExampleMatcher matcher = ExampleMatcher.matching()
                 .withMatcher("filmName",ExampleMatcher.GenericPropertyMatchers.contains())        //电影名称设置模糊查询
                 .withMatcher("director",ExampleMatcher.GenericPropertyMatchers.contains())        //导演设置模糊查询
