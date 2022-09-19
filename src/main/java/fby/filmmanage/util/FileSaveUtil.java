@@ -17,7 +17,7 @@ public class FileSaveUtil {
     public FileSaveUtil(Film film, MultipartFile[] files) throws IllegalStateException, IOException {
         String name = null;
         // 设置保存地址
-        String Dir = "E:\\static\\";
+        String Dir = "F:\\MyProjectDatabase\\FilmManage\\";
         File file = new File(Dir);
         if (!file.exists()){
             file.mkdir();

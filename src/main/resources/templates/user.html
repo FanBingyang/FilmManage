@@ -175,7 +175,7 @@
                 <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
             </div>
             <div class="modal-body">
-                <form action="/film/add.do" class="form-horizontal" id="edit_user_form">
+                <form  class="form-horizontal" id="edit_user_form">
                     <!-- 用户id -->
                     <input type="hidden" id="user_Id" name="userId"/>
                     <div class="form-group">
@@ -217,10 +217,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        <button type="button" id="update" class="btn btn-primary" onclick="update()" style="display: none;">
-                            保存修改
-                        </button>
-                        <button type="submit" id="insert" class="btn btn-primary" onclick="add()">确认添加</button>
+<!--                        <button type="button" id="update" class="btn btn-primary" onclick="update()">保存修改</button>-->
+                        <button type="button" id="insert" class="btn btn-primary" onclick="add()">确认添加</button>
+                        <button type="button" id="update" class="btn btn-primary" onclick="updat()">保存修改</button>
                     </div>
                 </form>
             </div>
@@ -258,7 +257,8 @@
 
     //点击编辑按钮
     function edit(id) {
-
+        $('#insert').hide();
+        $('#update').show();
         //在js中用Thymeleaf取值，格式如下：必须在写成 <script type="text/javascript" th:inline="javascript">
         //   / * [[${session.userId}]]*/'Sebastian'
         //   /*…*/中的内容在用浏览器打开静态 网页时，会被忽略.
@@ -266,13 +266,10 @@
         //  Thymeleaf解析时，会解析/*[[${session.userId}]]*/的内容，并把获得的值替换掉后面的内容。
         // 详见：https://blog.csdn.net/qq_27828109/article/details/77933870
         var userId = /*[[${session.userId}]]*/'Sebastian';
-        $('#insert').hide();
         // 判断当前用户是否是对自己的信息进行操作，如果是，能修改密码，如果不是则不能
         if (id != userId){
             $('#pwd').hide();
         }
-        $('#update').show();
-
         $.ajax({
             type: "get",
             url: "/user/findById.do",
@@ -289,8 +286,9 @@
         });
     }
 
-    //点击确认修改
-    function update() {
+
+    // 点击确认修改
+    function updat() {
         $.post("/user/update.do", $("#edit_user_form").serialize(), function (data) {
             alert("用户信息更新成功！");
             window.location.reload();

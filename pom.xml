@@ -11,6 +11,8 @@
     <groupId>FBY</groupId>
     <artifactId>filmmanage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+<!--    <packaging>war</packaging>-->
     <name>FilmManage</name>
     <description>Demo project for Spring Boot</description>
 
@@ -28,7 +30,8 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.30</version>
+            <version>8.0.18</version>
+<!--            <version>5.1.8</version>-->
             <scope>runtime</scope>
         </dependency>
         <!-- Junit测试 -->
@@ -70,6 +73,20 @@
             <artifactId>commons-fileupload</artifactId>
             <version>1.3</version>
         </dependency>
+        <!-- 部署成war包时开启 -->
+        <!-- 将嵌入的tomcat依赖方式改成provided(运行、测试、编译时将依赖的包加入本工程的classpath，运行时不加入) -->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-tomcat</artifactId>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+<!--         加入servlet-api依赖-->
+<!--        <dependency>-->
+<!--            <groupId>javax.servlet</groupId>-->
+<!--            <artifactId>javax.servlet-api</artifactId>-->
+<!--            <version>3.1.0</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -77,6 +94,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                </configuration>
             </plugin>
         </plugins>
     </build>

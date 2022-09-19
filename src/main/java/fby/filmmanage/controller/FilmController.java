@@ -77,7 +77,6 @@ public class FilmController {
      * @return
      */
     @RequestMapping("/add.do")
-    @ResponseBody
     public String add(Film film, @RequestParam("file") MultipartFile[] file) {
         try {
             FileSaveUtil fileSaveUtil = new FileSaveUtil(film,file);

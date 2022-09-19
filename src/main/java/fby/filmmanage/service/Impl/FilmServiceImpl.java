@@ -65,7 +65,7 @@ public class FilmServiceImpl implements FilmService {
     public Film findById(Integer id) {
         //使用getOne()返回的是代理对象，无法直接操作，会出现hibernate lazyxxx  no session 的错误
         //在测试方法上加入@Transactional注解可以解决报错的问题
-        // Film u = filmJpa.getOne(id);
+//         Film u = filmJpa.getOne(id);
         //  发现可以使用findById()，先调用findById()返回封装后的对象，然后使用get()方法，返回实体对象。
         Optional<Film> filmOptional = filmJpa.findById(id);
         // 在Optional类中有很多内置的方法，其中isPresen()方法返回Optional对象是否为null的结果，

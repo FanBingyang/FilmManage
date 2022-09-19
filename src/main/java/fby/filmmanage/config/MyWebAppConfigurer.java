@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MyWebAppConfigurer implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resource/**").addResourceLocations("file:E:/static/");
+        registry.addResourceHandler("/resource/**").addResourceLocations("file:F:/MyProjectDatabase/FilmManage/");
 //        registry.addResourceHandler("/movie/**").addResourceLocations("file:E:/static/");
     }
 }

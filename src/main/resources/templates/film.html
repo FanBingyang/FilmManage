@@ -219,7 +219,7 @@
                     <div class="form-group">
                         <label for="film_showtime" class="col-sm-2 control-label">上映时间</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="film_showtime" placeholder="影片上映时间" name="showtime">
+                            <input type="date" class="form-control" id="film_showtime" placeholder="影片上映时间" name="showtime">
                         </div>
                     </div>
                     <div class="form-group">
@@ -270,6 +270,8 @@
 
         $('#CoverImg').hide();
         $('#movie').hide();
+        $('#film_coverImg').show();
+        $('#film_movie').show();
     }
 
     //点击编辑按钮
@@ -280,6 +282,8 @@
 
         $('#film_coverImg').hide();
         $('#film_movie').hide();
+        $('#CoverImg').show();
+        $('#movie').show();
 
         $.ajax({
             type: "get",
